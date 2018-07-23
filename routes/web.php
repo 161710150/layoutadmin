@@ -18,3 +18,13 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['prefix'=>'admin','middleware'=>['auth','role:admin|superadmin|member']],
+function(){
+Route::resource('/jurusan', 'JurusanController');
+Route::resource('/kelas', 'KelasController');
+Route::resource('/siswa', 'DatasiswaController');
+Route::resource('/datatanya', 'DatapertanyaanController');
+Route::resource('/jawab', 'JawabController');
+Route::resource('/datapegawai', 'DatapegawaiController');
+
+});

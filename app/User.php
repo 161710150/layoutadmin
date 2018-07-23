@@ -4,9 +4,11 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laratrust\Traits\LaratrustUserTrait;
 
 class User extends Authenticatable
 {
+    use LaratrustUserTrait;
     use Notifiable;
 
     /**
@@ -26,4 +28,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    public function datasiswa()
+    {
+        return $this->hasOne('App\Datasiswa','id_user');
+    }
+    public function datapegawai()
+    {
+        return $this->hasOne('App\Datapegawai','id_user');
+    }
 }
